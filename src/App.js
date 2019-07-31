@@ -7,7 +7,7 @@ import {
   storeAnimals,
   storeDonations
 } from './actions';
-import { getAnimals, getDonations } from './apiCalls';
+import { getAnimals, getDonations, postNewDonation } from './apiCalls';
 import AnimalsContainer from './AnimalsContainer';
 import Donations from './Donations';
 import Form from './Form';
@@ -33,10 +33,14 @@ class App extends Component {
       .catch(error => storeError(error.message));
   };
 
+  addNewDonation = newDonation => {
+    postNewDonation(newDonation);
+  };
+
   render() {
     return (
       <main>
-        <Form />
+        <Form addNewDonation={this.addNewDonation} />
         {this.props.isLoading ? (
           <h1>Loading</h1>
         ) : (
