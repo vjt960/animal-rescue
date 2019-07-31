@@ -20,3 +20,8 @@ export const storeDonations = donations => ({
   type: 'STORE_DONATIONS',
   donations
 });
+
+export const addDonation = donation => ({
+  type: 'ADD_DONATION',
+  donation
+});
