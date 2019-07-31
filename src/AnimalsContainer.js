@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const AnimalsContainer = ({ animals }) => {
   const animalCards = animals.map(animal => {
     return (
-      <article className="animal-card">
+      <article key={animal.name} className="animal-card">
         <img src={animal.img} alt={animal.img} />
         <strong>{animal.name}</strong>
         <p className="species">{`species: ${animal.species}`}</p>
