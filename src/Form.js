@@ -24,6 +24,7 @@ class Form extends Component {
       donation
     };
     this.props.addDonation(newDonation);
+    this.props.addNewDonation(newDonation);
     this.clearInputs();
   };
 
