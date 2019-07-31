@@ -10,6 +10,7 @@ import {
 import { getAnimals, getDonations } from './apiCalls';
 import AnimalsContainer from './AnimalsContainer';
 import Donations from './Donations';
+import Form from './Form';
 import './App.css';
 
 class App extends Component {
@@ -35,13 +36,14 @@ class App extends Component {
   render() {
     return (
       <main>
+        <Form />
         {this.props.isLoading ? (
           <h1>Loading</h1>
         ) : (
-          <>
+          <div className="main_container">
             <AnimalsContainer />
             <Donations />
-          </>
+          </div>
         )}
       </main>
     );
