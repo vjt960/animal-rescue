@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { storeError, startLoading, endLoading } from './actions';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount = () => {
+    const { storeError, startLoading, endLoading } = this.props;
+    fetch('http://localhost:3001/api/v1/rescue-animals')
+      .then(response => response.json())
+      .then(data => data);
+  };
+
+  render() {
+    return <h1>Hello</h1>;
+  }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  startLoading: () => dispatch(startLoading()),
+  endLoading: () => dispatch(endLoading()),
+  storeError: errorMessage => dispatch(storeError(errorMessage))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

@@ -6,7 +6,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from '../src/reducers';
 import App from './App';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore(rootReducer, composeWithDevTools());
