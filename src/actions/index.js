@@ -15,3 +15,8 @@ export const storeAnimals = animals => ({
   type: 'STORE_ANIMALS',
   animals
 });
+
+export const storeDonations = donations => ({
+  type: 'STORE_DONATIONS',
+  donations
+});
