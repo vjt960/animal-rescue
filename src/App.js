@@ -1,26 +1,74 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {
+  storeError,
+  startLoading,
+  endLoading,
+  storeAnimals,
+  storeDonations
+} from './actions';
+import { getAnimals, getDonations, postNewDonation } from './apiCalls';
+import AnimalsContainer from './AnimalsContainer';
+import Donations from './Donations';
+import Form from './Form';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount = () => {
+    const {
+      storeError,
+      startLoading,
+      endLoading,
+      storeAnimals,
+      storeDonations
+    } = this.props;
+    startLoading();
+    getAnimals()
+      .then(animals => storeAnimals(animals))
+      .then(() =>
+        getDonations()
+          .then(donations => storeDonations(donations))
+          .then(() => endLoading())
+      )
+      .catch(error => storeError(error.message));
+  };
+
+  addNewDonation = newDonation => {
+    postNewDonation(newDonation);
+  };
+
+  render() {
+    return (
+      <main>
+        <Form addNewDonation={this.addNewDonation} />
+        {this.props.isLoading ? (
+          <h1>Loading</h1>
+        ) : (
+          <div className="main_container">
+            <AnimalsContainer />
+            <Donations />
+          </div>
+        )}
+      </main>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  hasErrored: state.hasErrored,
+  animals: state.animals
+});
+
+const mapDispatchToProps = dispatch => ({
+  startLoading: () => dispatch(startLoading()),
+  endLoading: () => dispatch(endLoading()),
+  storeError: errorMessage => dispatch(storeError(errorMessage)),
+  storeAnimals: animals => dispatch(storeAnimals(animals)),
+  storeDonations: donations => dispatch(storeDonations(donations))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
