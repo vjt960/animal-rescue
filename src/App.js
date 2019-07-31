@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { storeError, startLoading, endLoading } from './actions';
+import { storeError, startLoading, endLoading, storeAnimals } from './actions';
+import { getAnimals } from './apiCalls';
 import './App.css';
 
 class App extends Component {
   componentDidMount = () => {
-    const { storeError, startLoading, endLoading } = this.props;
-    fetch('http://localhost:3001/api/v1/rescue-animals')
-      .then(response => response.json())
-      .then(data => data);
+    const { storeError, startLoading, endLoading, storeAnimals } = this.props;
+    startLoading();
+    getAnimals()
+      .then(animals => storeAnimals(animals))
+      .then(() => endLoading())
+      .catch(error => storeError(error.message));
   };
 
   render() {
@@ -19,7 +22,8 @@ class App extends Component {
 const mapDispatchToProps = dispatch => ({
   startLoading: () => dispatch(startLoading()),
   endLoading: () => dispatch(endLoading()),
-  storeError: errorMessage => dispatch(storeError(errorMessage))
+  storeError: errorMessage => dispatch(storeError(errorMessage)),
+  storeAnimals: animals => dispatch(storeAnimals(animals))
 });
 
 export default connect(
