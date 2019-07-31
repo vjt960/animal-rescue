@@ -10,3 +10,8 @@ export const storeError = errorMessage => ({
   type: 'STORE_ERROR',
   errorMessage
 });
+
+export const storeAnimals = animals => ({
+  type: 'STORE_ANIMALS',
+  animals
+});
