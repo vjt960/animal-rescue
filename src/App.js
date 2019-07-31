@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { storeError, startLoading, endLoading, storeAnimals } from './actions';
 import { getAnimals } from './apiCalls';
+import AnimalsContainer from './AnimalsContainer';
 import './App.css';
 
 class App extends Component {
@@ -15,9 +16,19 @@ class App extends Component {
   };
 
   render() {
-    return <h1>Hello</h1>;
+    return (
+      <main>
+        {this.props.isLoading ? <h1>Loading</h1> : <AnimalsContainer />}
+      </main>
+    );
   }
 }
+
+const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+  hasErrored: state.hasErrored,
+  animals: state.animals
+});
 
 const mapDispatchToProps = dispatch => ({
   startLoading: () => dispatch(startLoading()),
@@ -27,6 +38,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
