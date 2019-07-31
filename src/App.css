@@ -7,8 +7,40 @@
 }
 
 .donations {
-  height: 100vh;
+  height: 120vh;
   width: 25%;
+  border-style: outset;
+}
+
+.donation-card {
+  box-shadow: 0 0 3px 3px gray;
+
+}
+
+.donation-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1%;
+}
+
+.donation-input {
+  height: 30px;
+  width: 300px;
+  margin: 15px 0;
+}
+
+button {
+  margin: 0;
+  height: 30px;
+  width: 300px;
+  background-color: #0099FE;
+  border-radius: 16px;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
 }
 
 .animals-container {
@@ -24,7 +56,7 @@
   height: 100%;
   width: 100%;
   text-align: center;
-  border: 1px solid black;
+  box-shadow: 0 0 3px 3px gray;
   font-size: 0.75rem;
 }
 
