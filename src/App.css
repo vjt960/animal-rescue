@@ -22,12 +22,19 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 1%;
+  background-image: url('https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/tnc_88405621.jpg?crop=0,251,4351,2393&wid=4000&hei=2200&scl=1.08775');
+  background-position: 50% 35%;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .donation-input {
+  color: black;
   height: 30px;
   width: 300px;
   margin: 15px 0;
+  outline: none;
 }
 
 button {
